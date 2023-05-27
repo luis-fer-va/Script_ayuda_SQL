@@ -11,8 +11,8 @@ insert into map_product_line values(
 ('Vintage Cars','Automóviles Antiguos'),
 ('Classic Cars','Automóviles Clásicos');
  
--- 3. Actualizar los datos
-update [sales_data_sample]
-set STATUS=c.tbl1
-from [sales_data_sample] v
-join new_status c  on v.tbl2 = c.tbl1;
+-- 3. Actualizar los datos con una consulta join.
+update [sales_data_sample] 
+set PRODUCTLINE = m.product
+from [sales_data_sample] as s
+join map_product_line m on m.map = s.PRODUCTLINE;
