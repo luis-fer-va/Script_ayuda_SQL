@@ -240,3 +240,20 @@ GO
 EXEC GetCustomerSummary @Country = 'Germany';
 EXEC GetCustomerSummary @Country = 'USA';
 EXEC GetCustomerSummary;
+
+
+-- Ejecutar store procedure dando como parametro el nombre de una tabla
+CREATE PROCEDURE sp_delete_fk 
+    @tablename NVARCHAR(128), 
+    @FK_NAME  NVARCHAR(128)
+AS
+BEGIN
+    DECLARE @sql NVARCHAR(MAX)
+
+    SET @sql = '
+        ALTER TABLE [' + @tablename + '] 
+        DROP CONSTRAINT [' + @FK_NAME + '] 
+    '
+
+    EXEC sp_executesql @sql
+END
